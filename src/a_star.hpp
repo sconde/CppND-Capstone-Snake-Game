@@ -27,7 +27,7 @@ class AStar
 {
 public:
   // default ctor
-  AStar() = delete;
+  //AStar() = default;
 
   // ctor
   AStar(const std::size_t grid_w, std::size_t grid_h);
@@ -35,7 +35,7 @@ public:
   // dtor
   virtual ~AStar ();
 
-  std::vector<SDL_Point> search(const SDL_Point &start, const SDL_Point *&end);
+  std::vector<SDL_Point> search(const SDL_Point &start, const SDL_Point &end);
 
   inline int Heuristic(int x1, int y1, int x2, int y2){
     return std::abs(x2 - x1) + std::abs(y2 - y1);
@@ -49,7 +49,7 @@ private:
   std::vector<Node> open_lists_ {};
 
   // directional deltas
-  constexpr static int delta[4][2]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
+  constexpr static int delta_[4][2]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 
 };
 
