@@ -7,13 +7,14 @@
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
-#include "a_star.hpp"
+#include "a_star.h"
 
 class Game {
  public:
   Game(std::size_t grid_width, std::size_t grid_height);
   void Run(Controller const &controller, Renderer &renderer,
-           std::size_t target_frame_duration);
+           std::size_t target_frame_duration,
+           std::size_t grid_w, std::size_t grid_h);
   int GetScore() const;
   int GetSize() const;
 

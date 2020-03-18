@@ -30,7 +30,7 @@ public:
   AStar() = delete;
 
   // ctor
-  AStar (const std::size_t grid_w, std::size_t grid_h);
+  AStar(const std::size_t grid_w, std::size_t grid_h);
 
   // dtor
   virtual ~AStar ();
