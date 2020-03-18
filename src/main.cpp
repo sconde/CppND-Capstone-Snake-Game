@@ -15,9 +15,7 @@ int main() {
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
   Controller controller;
   auto game = std::make_unique<Game>(kGridWidth, kGridHeight);
-  game->run(controller, renderer, kMsPerFrame);
-  //Game game(kGridWidth, kGridHeight);
-  //game.Run(controller, renderer, kMsPerFrame);
+  game->Run(controller, renderer, kMsPerFrame);
   std::cout << "Game has terminated successfully!\n";
   std::cout << "Score: " << game->GetScore() << "\n";
   std::cout << "Size: " << game->GetSize() << "\n";
