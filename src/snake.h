@@ -8,6 +8,11 @@
 #include <algorithm>
 #include "SDL.h"
 
+struct SNAKE_MOVE {
+  int x = 0;
+  int y = 0;
+};
+
 class Snake {
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };

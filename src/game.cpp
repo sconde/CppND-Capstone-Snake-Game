@@ -20,12 +20,13 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   Uint32 frame_duration;
   int frame_count = 0;
   bool running = true;
+  SNAKE_MOVE snake_movement;
 
   while (running) {
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, snake_);
+    controller.HandleInput(running, snake_, snake_movement);
     Update();
     a_star_.reset(new AStar(grid_width, grid_height));
     // AStar a_star(grid_width, grid_height);
@@ -35,7 +36,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     end.x = food_.y;
     end.y = food_.x;
     // std::cout << "start.x: " << start.x << ", start.y: " << start.y << ", end.x: " << end.x << ", end.y: " << end.y << std::endl;
-    const std::vector<SDL_Point> path = a_star_->Search(start, end);
+    const auto path = a_star_->Search(start, end);
     renderer.Render(snake_, food_, path);
 
     frame_end = SDL_GetTicks();
