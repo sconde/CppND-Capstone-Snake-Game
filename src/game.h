@@ -11,7 +11,7 @@
 class Game {
  public:
   Game(std::size_t grid_width, std::size_t grid_height);
-  void Run(Controller const &controller, Renderer &renderer,
+  void Run(Renderer &renderer,
            std::size_t target_frame_duration,
            const std::size_t grid_width, const std::size_t grid_height);
   int GetScore() const;
@@ -19,6 +19,7 @@ class Game {
 
  private:
   Snake snake_;
+  Controller controller_;
   SDL_Point food_;
   std::unique_ptr<AStar> a_star_;
 
