@@ -22,8 +22,8 @@ void Game::Run(Renderer &renderer,
   bool running = true;
   SNAKE_MOVE snake_movement;
 
-  while (running) {
-  //for (int i = 0; i < 50; ++i) {
+  //while (running) {
+  for (int i = 0; i < 1; ++i) {
     
     frame_start = SDL_GetTicks();
 
@@ -41,39 +41,33 @@ void Game::Run(Renderer &renderer,
 
     snake_movement.x = end.x;
     snake_movement.y = end.y;
-    // std::cout << "start.x: " << start.x << ", start.y: " << start.y << ", end.x: " << end.x << ", end.y: " << end.y << std::endl;
 
     const auto path = a_star_->Search(start, end);
 
-    //if ( path.size() > 1 ) {
-    snake_movement.x = path[0].x;
-    snake_movement.y = path[0].y;
-    //}
-    //{
-    //snake_.
-    //}
+    snake_movement.x = path[1].x;
+    snake_movement.y = path[1].y;
 
     std::cout << "SIDAFA: start: ("<< start.x << "," << start.y << ")" << std::endl;
     std::cout << "SIDAFA: end: ("<< end.x << "," << end.y << ")" << std::endl;
     std::cout << "SIDAFA: snake_movement: ("<< snake_movement.x << "," << snake_movement.y << ")" << std::endl;
+    std::cout << "SIDAFA: snake_head: ("<< snake_.GetHeadY() << "," << snake_.GetHeadX() << ")" << std::endl;
+    std::cout << "SIDAFA: speed = " << snake_.GetSpeed()<< std::endl;
+
 
     SNAKE_MOVE move;
     const int dy = end.y - snake_movement.y;
     const int dx = end.x - snake_movement.x;
     
-    if ( dy > 0 ) move.y = 1;
-    else if ( dy < 0) move.y = -1;
-
-    if ( dx > 0 ) move.x = 1;
-    else if ( dx < 0) move.x = -1;
-
-    std::cout << "SIDAFA: move: (" << move.x << "," << move.y << ")" << std::endl;
 
     //asm("int $3");
     //std::cout << "SIDAFA: got here!!" << std::endl;
 
-    renderer.Render(snake_, food_, path, move);
-    Update();
+    if (start.y != snake_movement.y) snake_.SetHeadY( snake_movement.y );
+    if (start.x != snake_movement.x) snake_.SetHeadX( snake_movement.x );
+    snake_.UpdateHead();
+    std::cout << "SIDAFA: snake_head(update): ("<< snake_.GetHeadY() << "," << snake_.GetHeadX() << ")" << std::endl;
+
+    renderer.Render(snake_, food_, path, snake_movement);
 
     frame_end = SDL_GetTicks();
 

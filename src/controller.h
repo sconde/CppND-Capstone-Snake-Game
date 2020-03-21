@@ -10,7 +10,7 @@ class Controller {
 
  private:
   void ChangeDirection(Snake &snake, Snake::Direction input,
-                       Snake::Direction opposite) const;
+                       Snake::Direction opposite) ;
 
   std::mutex mutex_;
 };

@@ -22,8 +22,8 @@ void Snake::Update() {
 void Snake::UpdateHead() {
   std::lock_guard<std::mutex> lck(mutex_);
 
-  std::cout << "SIDAFA: got here ( snake::updateHead) !!" << std::endl;
-  //asm("int $3");
+  //std::cout << "SIDAFA: got here ( snake::updateHead) !!" << std::endl;
+  ////asm("int $3");
 
   switch (direction_) {
     case Direction::kUp:

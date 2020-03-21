@@ -43,11 +43,21 @@ class Snake {
       std::lock_guard<std::mutex> lck(mutex_);
       return head_y_;
   };
+  void SetHeadX(const int x) {
+      std::lock_guard<std::mutex> lck(mutex_);
+      head_x_ = static_cast<float>(x);
+  };
+  void SetHeadY(const int y) {
+      std::lock_guard<std::mutex> lck(mutex_);
+      head_y_ = static_cast<float>(y);
+  };
+
   std::vector<SDL_Point> GetBody() {
       std::lock_guard<std::mutex> lck(mutex_);
       return body_;
   };
 
+  void UpdateHead();
  private:
   bool growing_{false};
   int grid_width_;
@@ -60,7 +70,6 @@ class Snake {
   std::vector<SDL_Point> body_;
   Direction direction_ = Direction::kUp;
   std::mutex mutex_;
-  void UpdateHead();
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);
 };
 
