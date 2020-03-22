@@ -20,10 +20,10 @@ void Game::Run(Renderer &renderer,
   Uint32 frame_duration;
   int frame_count = 0;
   bool running = true;
-  SNAKE_MOVE snake_movement;
 
-  while (running) {
-  //for (int i = 0; i < 1; ++i) {
+  SNAKE_MOVE snake_movement;
+  //while (running) {
+  for (int i = 0; i < 10; ++i) {
     
     frame_start = SDL_GetTicks();
 
@@ -54,20 +54,13 @@ void Game::Run(Renderer &renderer,
     std::cout << "SIDAFA: speed = " << snake_.GetSpeed()<< std::endl;
 
 
-    SNAKE_MOVE move;
-    const int dy = end.y - snake_movement.y;
-    const int dx = end.x - snake_movement.x;
+    std::cout << "SIDAFA: snake_movement(change): ("<< snake_movement.x << "," << snake_movement.y << ")" << std::endl;
     
-
-    //asm("int $3");
-    //std::cout << "SIDAFA: got here!!" << std::endl;
-
-    //if (start.y != snake_movement.y) snake_.SetHeadY( snake_movement.y );
-    //if (start.x != snake_movement.x) snake_.SetHeadX( snake_movement.x );
-    //snake_.UpdateHead();
-    //std::cout << "SIDAFA: snake_head(update): ("<< snake_.GetHeadY() << "," << snake_.GetHeadX() << ")" << std::endl;
+    snake_.SetHeadY( snake_movement.x );
+    snake_.SetHeadX( snake_movement.y );
 
     renderer.Render(snake_, food_, path, snake_movement);
+    Update();
 
     frame_end = SDL_GetTicks();
 
@@ -77,7 +70,7 @@ void Game::Run(Renderer &renderer,
     frame_duration = frame_end - frame_start;
 
     // After every second, update the window title.
-    if (frame_end - title_timestamp >= 1000) {
+    if (frame_end - title_timestamp >= 1000000) {
       renderer.UpdateWindowTitle(score_, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
@@ -89,6 +82,10 @@ void Game::Run(Renderer &renderer,
     if (frame_duration < target_frame_duration) {
       SDL_Delay(target_frame_duration - frame_duration);
     }
+
+    // reset the movement
+    snake_movement.x = 0;
+    snake_movement.y = 0;
   }
 }
 
@@ -111,9 +108,6 @@ void Game::Update() {
   if (!snake_.GetAlive()) return;
 
   snake_.Update();
-
-  //asm("int $3");
-  //std::cout << "SIDAFA: got here!!" << std::endl;
 
 
   int new_x = static_cast<int>(snake_.GetHeadX());
