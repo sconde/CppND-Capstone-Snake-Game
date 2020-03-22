@@ -24,15 +24,15 @@ void Game::Run(Renderer &renderer,
   SNAKE_MOVE snake_movement;
 
   while (running) {
-  //for (int i = 0; i < 5; ++i) {
     
     frame_start = SDL_GetTicks();
 
-
-    a_star_.reset(new AStar(grid_width, grid_height));
     // Input, Update, Render - the main game loop.
     controller_.HandleInput(running, snake_, snake_movement);
+    a_star_.reset(new AStar(grid_width, grid_height));
     Update();
+
+
     // AStar a_star(grid_width, grid_height);
     SDL_Point start, end;
     start.x = snake_.GetHeadY();
@@ -48,15 +48,6 @@ void Game::Run(Renderer &renderer,
     snake_movement.x = path[1].x;
     snake_movement.y = path[1].y;
 
-    //std::cout << "SIDAFA: start: ("<< start.x << "," << start.y << ")" << std::endl;
-    //std::cout << "SIDAFA: end: ("<< end.x << "," << end.y << ")" << std::endl;
-    //std::cout << "SIDAFA: snake_movement: ("<< snake_movement.x << "," << snake_movement.y << ")" << std::endl;
-    //std::cout << "SIDAFA: snake_head: ("<< snake_.GetHeadY() << "," << snake_.GetHeadX() << ")" << std::endl;
-    //std::cout << "SIDAFA: speed = " << snake_.GetSpeed()<< std::endl;
-
-
-    //std::cout << "SIDAFA: snake_movement(change): ("<< snake_movement.x << "," << snake_movement.y << ")" << std::endl;
-    
     snake_.SetHeadY( snake_movement.x );
     snake_.SetHeadX( snake_movement.y );
     Update();
@@ -89,6 +80,8 @@ void Game::Run(Renderer &renderer,
     start.y = snake_.GetHeadX();
     snake_movement.x = start.x;
     snake_movement.y = start.y;
+
+    running = ( score_ <= grid_width ) or ( score_ <= grid_height);
   }
 }
 
@@ -116,10 +109,11 @@ void Game::Update() {
   int new_x = static_cast<int>(snake_.GetHeadX());
   int new_y = static_cast<int>(snake_.GetHeadY());
 
-
+  auto near_x = ( (food_.x == new_x) or ( std::abs(food_.x - new_x) == 1) );
+  auto near_y = ( (food_.y == new_y) or ( std::abs(food_.y - new_y) == 1) );
 
   // Check if there's food_ over here
-  if (food_.x == new_x && food_.y == new_y) {
+  if ( near_x and near_y) {
     score_++;
     PlaceFood();
     // Grow snake_ and increase speed.

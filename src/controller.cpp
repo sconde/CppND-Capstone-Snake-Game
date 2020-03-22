@@ -24,9 +24,6 @@ void Controller::HandleInput(bool &running, Snake &snake, SNAKE_MOVE &move) {
     } 
     else if (e.type != SDL_KEYDOWN) {
 
-      std::cout << "SIDAFA: controller::HandleInput"
-                << "(" << move.x << "," << move.y << ")" <<  std::endl;
-
       if ( move.y > 0 ) e.key.keysym.sym = SDLK_UP;
       else if ( move.y < 0 ) e.key.keysym.sym = SDLK_DOWN;
       else if ( move.x < 0 ) e.key.keysym.sym = SDLK_LEFT;

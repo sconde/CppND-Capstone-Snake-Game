@@ -19,11 +19,6 @@ AStar::AStar(const std::size_t grid_width, const std::size_t grid_height) {
         }
     }
 
-    cout << "AStar is Done\n" << endl;
-}
-
-AStar::~AStar() {
-    cout << "~AStar is Done" << endl;
 }
 
 
@@ -94,21 +89,8 @@ AStar::Search(const SDL_Point &start_point, const SDL_Point &end_point) {
                 }
 
                 std::reverse(results.begin(), results.end());
-                cout << "A* search OK! search_count: "  << search_count << endl;
+                //cout << "A* search OK! search_count: "  << search_count << endl;
                 results.pop_back();
-                // /****search test****/
-                // for (int i = 0; i < 32; i++) {
-                //     for (int j = 0; j < nodes_[i].size(); j++) {
-                //         if (State::kPath == nodes_[i][j].state) {
-                //             cout << "*, ";
-                //         } else {
-                //             cout << static_cast<int>(nodes_[i][j].state) << ", ";
-                //         }
-                //     }
-                //     cout << endl;
-                // }
-                // /****search test****/
-
                 return results;
             }
 
@@ -137,6 +119,5 @@ AStar::Search(const SDL_Point &start_point, const SDL_Point &end_point) {
     }
 
     cout << "A* search FAILED! search_count: "  << search_count << endl;
-
     return results;
 }
