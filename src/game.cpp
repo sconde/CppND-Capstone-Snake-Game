@@ -22,16 +22,17 @@ void Game::Run(Renderer &renderer,
   bool running = true;
 
   SNAKE_MOVE snake_movement;
-  //while (running) {
-  for (int i = 0; i < 5; ++i) {
+
+  while (running) {
+  //for (int i = 0; i < 5; ++i) {
     
     frame_start = SDL_GetTicks();
 
 
+    a_star_.reset(new AStar(grid_width, grid_height));
     // Input, Update, Render - the main game loop.
     controller_.HandleInput(running, snake_, snake_movement);
     Update();
-    a_star_.reset(new AStar(grid_width, grid_height));
     // AStar a_star(grid_width, grid_height);
     SDL_Point start, end;
     start.x = snake_.GetHeadY();
@@ -47,14 +48,14 @@ void Game::Run(Renderer &renderer,
     snake_movement.x = path[1].x;
     snake_movement.y = path[1].y;
 
-    std::cout << "SIDAFA: start: ("<< start.x << "," << start.y << ")" << std::endl;
-    std::cout << "SIDAFA: end: ("<< end.x << "," << end.y << ")" << std::endl;
-    std::cout << "SIDAFA: snake_movement: ("<< snake_movement.x << "," << snake_movement.y << ")" << std::endl;
-    std::cout << "SIDAFA: snake_head: ("<< snake_.GetHeadY() << "," << snake_.GetHeadX() << ")" << std::endl;
-    std::cout << "SIDAFA: speed = " << snake_.GetSpeed()<< std::endl;
+    //std::cout << "SIDAFA: start: ("<< start.x << "," << start.y << ")" << std::endl;
+    //std::cout << "SIDAFA: end: ("<< end.x << "," << end.y << ")" << std::endl;
+    //std::cout << "SIDAFA: snake_movement: ("<< snake_movement.x << "," << snake_movement.y << ")" << std::endl;
+    //std::cout << "SIDAFA: snake_head: ("<< snake_.GetHeadY() << "," << snake_.GetHeadX() << ")" << std::endl;
+    //std::cout << "SIDAFA: speed = " << snake_.GetSpeed()<< std::endl;
 
 
-    std::cout << "SIDAFA: snake_movement(change): ("<< snake_movement.x << "," << snake_movement.y << ")" << std::endl;
+    //std::cout << "SIDAFA: snake_movement(change): ("<< snake_movement.x << "," << snake_movement.y << ")" << std::endl;
     
     snake_.SetHeadY( snake_movement.x );
     snake_.SetHeadX( snake_movement.y );
@@ -70,7 +71,7 @@ void Game::Run(Renderer &renderer,
 
     // After every second, update the window title.
     //if (frame_end - title_timestamp >= 1000) {
-    /*if (frame_end - frame_start >= 100000)*/ {
+    if (frame_end - frame_start >= target_frame_duration) {
       renderer.UpdateWindowTitle(score_, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
@@ -79,13 +80,15 @@ void Game::Run(Renderer &renderer,
     // If the time for this frame is too small (i.e. frame_duration is
     // smaller than the target ms_per_frame), delay the loop to
     // achieve the correct frame rate.
-    /*if (frame_duration < target_frame_duration)i*/ {
+    if (frame_duration < target_frame_duration/10) {
       SDL_Delay(target_frame_duration - frame_duration);
     }
 
     // reset the movement
-    snake_movement.x = start.x - snake_movement.x;
-    snake_movement.y = start.y - snake_movement.y;
+    start.x = snake_.GetHeadY();
+    start.y = snake_.GetHeadX();
+    snake_movement.x = start.x;
+    snake_movement.y = start.y;
   }
 }
 
