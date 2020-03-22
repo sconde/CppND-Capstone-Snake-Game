@@ -22,8 +22,8 @@ void Game::Run(Renderer &renderer,
   bool running = true;
   SNAKE_MOVE snake_movement;
 
-  //while (running) {
-  for (int i = 0; i < 1; ++i) {
+  while (running) {
+  //for (int i = 0; i < 1; ++i) {
     
     frame_start = SDL_GetTicks();
 
