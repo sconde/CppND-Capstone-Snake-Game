@@ -38,6 +38,13 @@ bool AStar::IsInRange(const int x, const int y) {
     }
 }
 
+//void AStar::AddToOpen(int x, int y, int g, int h,
+        //std::vector<Node>& open_nodes,
+        //std::vector<std::vector<State>>& grid ) 
+//{
+
+//}
+
 std::vector<SDL_Point>
 AStar::Search(const SDL_Point &start_point, const SDL_Point &end_point) {
 
@@ -53,9 +60,11 @@ AStar::Search(const SDL_Point &start_point, const SDL_Point &end_point) {
     node.y = start_point.y;
     node.g_cost = 0;
     node.h_cost = Heuristic(start_point.x, start_point.y, end_point.x, end_point.y);
+
     node.state = State::kOpen;
     nodes_[node.x][node.y].x = node.x;
     nodes_[node.x][node.y].y = node.y;
+
     open_list_.push_back(node);
 
     while (not open_list_.empty()) {

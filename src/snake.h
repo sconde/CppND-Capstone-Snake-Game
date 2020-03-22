@@ -29,10 +29,10 @@ class Snake {
   bool SnakeCell(int x, int y);
 
   void SetDirection(const Direction direction) { direction_ = direction; };
-  void SetSpeed(const float speed) { speed_ = speed; };
+  void SetSpeed(const int speed) { speed_ = speed; };
 
   Direction GetDirection() const { return direction_; };
-  float GetSpeed() const { return speed_; };
+  int GetSpeed() const { return speed_; };
   int GetSize() const { return size_; };
   bool GetAlive() const { return alive_; };
   float GetHeadX() {
@@ -62,7 +62,7 @@ class Snake {
   bool growing_{false};
   int grid_width_;
   int grid_height_;
-  float speed_{0.1f};
+  int speed_{1};
   int size_{1};
   bool alive_{true};
   float head_x_;

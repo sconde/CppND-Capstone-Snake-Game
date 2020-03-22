@@ -62,10 +62,10 @@ void Game::Run(Renderer &renderer,
     //asm("int $3");
     //std::cout << "SIDAFA: got here!!" << std::endl;
 
-    if (start.y != snake_movement.y) snake_.SetHeadY( snake_movement.y );
-    if (start.x != snake_movement.x) snake_.SetHeadX( snake_movement.x );
-    snake_.UpdateHead();
-    std::cout << "SIDAFA: snake_head(update): ("<< snake_.GetHeadY() << "," << snake_.GetHeadX() << ")" << std::endl;
+    //if (start.y != snake_movement.y) snake_.SetHeadY( snake_movement.y );
+    //if (start.x != snake_movement.x) snake_.SetHeadX( snake_movement.x );
+    //snake_.UpdateHead();
+    //std::cout << "SIDAFA: snake_head(update): ("<< snake_.GetHeadY() << "," << snake_.GetHeadX() << ")" << std::endl;
 
     renderer.Render(snake_, food_, path, snake_movement);
 

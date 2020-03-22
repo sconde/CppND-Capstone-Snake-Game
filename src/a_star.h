@@ -37,6 +37,10 @@ private:
     inline int Heuristic(int x1, int y1, int x2, int y2) {
       return std::abs(x2 - x1) + std::abs(y2 - y1);
     }
+
+    //void AddToOpen(int x, int y, int g, int h,
+        //std::vector<std::vector<int>>& open_nodes,
+        //std::vector<std::vector<State>>& grid );
 };
 
 #endif
