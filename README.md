@@ -29,3 +29,14 @@ In this project, you can build your own C++ application or extend this Snake gam
 2. Make a build directory in the top level directory: `mkdir build && cd build`
 3. Compile: `cmake .. && make`
 4. Run it: `./SnakeGame`.
+
+
+## Motivation
+
+I was motivated by the exceptional work of [yaohuaxu](https://github.com/yaohuaxu/CppND-Capstone-Snake-Game) using the **A-Star** algorithm to help the player play the game. I decided to use the A-Stat algorithm I had written and attempt to automate the game. 
+
+While the first attempt at automation was somewhat successful, I noticed a little issue with the periodic boundary condition. This made me update the code further to also allow user interaction to "aid" solve the game faster.
+
+Current limitations and potential upgrades are listed in the issues.
+
+
