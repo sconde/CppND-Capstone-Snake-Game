@@ -16,11 +16,8 @@ AStar::AStar(const std::size_t grid_width, const std::size_t grid_height) {
         nodes_[i].resize(grid_width);
         for (int j = 0; j < nodes_[i].size(); j++) {
             nodes_[i][j].state = State::kEmpty;
-            // cout << static_cast<int>(nodes_[i][j].state) << ", ";
         }
-        // cout << endl;
     }
-
 
     cout << "AStar is Done\n" << endl;
 }
@@ -29,9 +26,6 @@ AStar::~AStar() {
     cout << "~AStar is Done" << endl;
 }
 
-//int AStar::Heuristic(const int start_point_x, const int start_point_y, const int end_point_x, const int end_point_y) {
-    //return abs(end_point_x - start_point_x) + abs(end_point_y - start_point_y);
-//}
 
 bool AStar::IsInRange(const int x, const int y) {
     const bool on_board_x = (x >= 0 && x < nodes_.size());
@@ -44,9 +38,12 @@ bool AStar::IsInRange(const int x, const int y) {
     }
 }
 
-vector<SDL_Point> AStar::Search(const SDL_Point &start_point, const SDL_Point &end_point) {
+std::vector<SDL_Point>
+AStar::Search(const SDL_Point &start_point, const SDL_Point &end_point) {
+
+    std::vector<SDL_Point> results{};
+
     open_list_.clear();
-    vector<SDL_Point> SDL_Points{};
     SDL_Point SDL_point;
     int search_count = 0;
 
@@ -89,14 +86,14 @@ vector<SDL_Point> AStar::Search(const SDL_Point &start_point, const SDL_Point &e
                 while (nullptr != node_next) {
                     SDL_point.x = node_next->x;
                     SDL_point.y = node_next->y;
-                    SDL_Points.push_back(SDL_point);
+                    results.push_back(SDL_point);
                     node_next->state = State::kPath;
                     node_next = node_next->parent;
                 }
 
-                std::reverse(SDL_Points.begin(), SDL_Points.end());
+                std::reverse(results.begin(), results.end());
                 cout << "A* search OK! search_count: "  << search_count << endl;
-                SDL_Points.pop_back();
+                results.pop_back();
                 // /****search test****/
                 // for (int i = 0; i < 32; i++) {
                 //     for (int j = 0; j < nodes_[i].size(); j++) {
@@ -110,7 +107,7 @@ vector<SDL_Point> AStar::Search(const SDL_Point &start_point, const SDL_Point &e
                 // }
                 // /****search test****/
 
-                return SDL_Points;
+                return results;
             }
 
             if (State::kClosed == node_next->state) {
@@ -139,5 +136,5 @@ vector<SDL_Point> AStar::Search(const SDL_Point &start_point, const SDL_Point &e
 
     cout << "A* search FAILED! search_count: "  << search_count << endl;
 
-    return SDL_Points;
+    return results;
 }
