@@ -38,13 +38,6 @@ bool AStar::IsInRange(const int x, const int y) {
     }
 }
 
-//void AStar::AddToOpen(int x, int y, int g, int h,
-        //std::vector<Node>& open_nodes,
-        //std::vector<std::vector<State>>& grid ) 
-//{
-
-//}
-
 std::vector<SDL_Point>
 AStar::Search(const SDL_Point &start_point, const SDL_Point &end_point) {
 

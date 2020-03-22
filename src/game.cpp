@@ -116,6 +116,8 @@ void Game::Update() {
   int new_x = static_cast<int>(snake_.GetHeadX());
   int new_y = static_cast<int>(snake_.GetHeadY());
 
+
+
   // Check if there's food_ over here
   if (food_.x == new_x && food_.y == new_y) {
     score_++;
