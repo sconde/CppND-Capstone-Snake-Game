@@ -23,7 +23,7 @@ void Game::Run(Renderer &renderer,
 
   SNAKE_MOVE snake_movement;
   //while (running) {
-  for (int i = 0; i < 10; ++i) {
+  for (int i = 0; i < 5; ++i) {
     
     frame_start = SDL_GetTicks();
 
@@ -58,9 +58,8 @@ void Game::Run(Renderer &renderer,
     
     snake_.SetHeadY( snake_movement.x );
     snake_.SetHeadX( snake_movement.y );
-
-    renderer.Render(snake_, food_, path, snake_movement);
     Update();
+    renderer.Render(snake_, food_, path, snake_movement);
 
     frame_end = SDL_GetTicks();
 
@@ -70,7 +69,8 @@ void Game::Run(Renderer &renderer,
     frame_duration = frame_end - frame_start;
 
     // After every second, update the window title.
-    if (frame_end - title_timestamp >= 1000000) {
+    //if (frame_end - title_timestamp >= 1000) {
+    /*if (frame_end - frame_start >= 100000)*/ {
       renderer.UpdateWindowTitle(score_, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
@@ -79,13 +79,13 @@ void Game::Run(Renderer &renderer,
     // If the time for this frame is too small (i.e. frame_duration is
     // smaller than the target ms_per_frame), delay the loop to
     // achieve the correct frame rate.
-    if (frame_duration < target_frame_duration) {
+    /*if (frame_duration < target_frame_duration)i*/ {
       SDL_Delay(target_frame_duration - frame_duration);
     }
 
     // reset the movement
-    snake_movement.x = 0;
-    snake_movement.y = 0;
+    snake_movement.x = start.x - snake_movement.x;
+    snake_movement.y = start.y - snake_movement.y;
   }
 }
 

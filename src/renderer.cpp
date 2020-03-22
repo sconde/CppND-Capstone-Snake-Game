@@ -67,7 +67,9 @@ void Renderer::Render(Snake &snake, const SDL_Point &food, const std::vector<SDL
 
   // Render snake's A* path
   SDL_SetRenderDrawColor(sdl_renderer_, 0xFF, 0x4F, 0xFF, 0x4F);
-  for (SDL_Point const &point : path) {
+  //for (SDL_Point const &point : path) {
+  for(int ii =1; ii< path.size(); ii++){
+    const auto point = path[ii];
     block.x = point.y * block.w;
     block.y = point.x * block.h;
     SDL_RenderFillRect(sdl_renderer_, &block);

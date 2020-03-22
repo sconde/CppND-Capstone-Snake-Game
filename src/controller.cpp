@@ -25,44 +25,14 @@ void Controller::HandleInput(bool &running, Snake &snake, SNAKE_MOVE &move) {
 
     else /*if (e.type == SDL_KEYDOWN) i*/{
 
-      // move x first
-      if ( std::abs(move.y) >= std::abs(move.x) ){
+      std::cout << "SIDAFA: controller::HandleInput"
+                << "(" << move.x << "," << move.y << ")" <<  std::endl;
 
-        if (move.x > 0)
-          ChangeDirection(snake, Snake::Direction::kUp,
-              Snake::Direction::kDown);
-        else if (move.x < 0)
-          ChangeDirection(snake, Snake::Direction::kDown,
-              Snake::Direction::kUp);
+      if ( move.x < 0 ) e.key.keysym.sym = SDLK_UP;
+      else if ( move.x > 0 ) e.key.keysym.sym = SDLK_DOWN;
+      else if ( move.y < 0 ) e.key.keysym.sym = SDLK_LEFT;
+      else  e.key.keysym.sym = SDLK_RIGHT;
 
-        if (move.y < 0)
-          ChangeDirection(snake, Snake::Direction::kLeft,
-              Snake::Direction::kRight);
-        else if (move.y > 0)
-          ChangeDirection(snake, Snake::Direction::kRight,
-              Snake::Direction::kLeft);
-
-
-      }else {
-
-        if (move.y < 0)
-          ChangeDirection(snake, Snake::Direction::kLeft,
-              Snake::Direction::kRight);
-        else if (move.y > 0)
-          ChangeDirection(snake, Snake::Direction::kRight,
-              Snake::Direction::kLeft);
-
-        if (move.x > 0)
-          ChangeDirection(snake, Snake::Direction::kUp,
-              Snake::Direction::kDown);
-        else if (move.x < 0)
-          ChangeDirection(snake, Snake::Direction::kDown,
-              Snake::Direction::kUp);
-      }
-
-  snake.UpdateHead();
-
-/*
       switch (e.key.keysym.sym) {
         case SDLK_UP:
           ChangeDirection(snake, Snake::Direction::kUp,
@@ -84,7 +54,7 @@ void Controller::HandleInput(bool &running, Snake &snake, SNAKE_MOVE &move) {
               Snake::Direction::kLeft);
           break;
       }
-      */
+
     }
 
 
