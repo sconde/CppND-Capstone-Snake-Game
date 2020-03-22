@@ -27,12 +27,13 @@ public:
 
     vector<SDL_Point> Search(const SDL_Point &start_point, const SDL_Point &end_point);
 
+
 private:
     vector<vector<Node>> nodes_;
     vector<Node> open_list_{};
     constexpr static int delta_[4][2]{ {-1, 0}, {0, -1}, {1, 0}, {0, 1} };
 
-    bool IsInRange(const int x, const int y);
+    bool CheckValidCell(const int x, const int y);
 
     inline int Heuristic(int x1, int y1, int x2, int y2) {
       return std::abs(x2 - x1) + std::abs(y2 - y1);
