@@ -21,29 +21,6 @@ AStar::AStar(const std::size_t grid_width, const std::size_t grid_height) {
         // cout << endl;
     }
 
-// /****search test****/
-    // cout << "nodes_.size(): " << nodes_.size() << endl;
-    // cout << "nodes_[0].size(): " << nodes_[0].size() << endl;
-//     SDL_Point start, end;
-//     start.x = 0;
-//     start.y = 0;
-//     end.x = 10;
-//     end.y = 10;
-//     vector<SDL_Point> SDL_Points = Search(start, end);
-
-//     cout << "SDL_Points.size(): " << SDL_Points.size() << endl;
-
-//     for (int i = 0; i < grid_height; i++) {
-//         for (int j = 0; j < nodes_[i].size(); j++) {
-//             if (State::kPath == nodes_[i][j].state) {
-//                 cout << "*, ";
-//             } else {
-//                 cout << static_cast<int>(nodes_[i][j].state) << ", ";
-//             }
-//         }
-//         cout << endl;
-//     }
-// /****search test****/
 
     cout << "AStar is Done\n" << endl;
 }
@@ -52,9 +29,9 @@ AStar::~AStar() {
     cout << "~AStar is Done" << endl;
 }
 
-int AStar::Heuristic(const int start_point_x, const int start_point_y, const int end_point_x, const int end_point_y) {
-    return abs(end_point_x - start_point_x) + abs(end_point_y - start_point_y);
-}
+//int AStar::Heuristic(const int start_point_x, const int start_point_y, const int end_point_x, const int end_point_y) {
+    //return abs(end_point_x - start_point_x) + abs(end_point_y - start_point_y);
+//}
 
 bool AStar::IsInRange(const int x, const int y) {
     const bool on_board_x = (x >= 0 && x < nodes_.size());

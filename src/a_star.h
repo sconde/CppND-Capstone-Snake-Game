@@ -7,12 +7,7 @@
 
 using std::vector;
 
-enum class State {
-    kEmpty = 0,
-    kClosed = 1,
-    kOpen = 2,
-    kPath = 3
-};
+enum class State { kEmpty, kClosed, kOpen, kPath, };
 
 class Node {
 public:
@@ -27,14 +22,21 @@ public:
 class AStar {
 public:
     AStar(const std::size_t grid_width, const std::size_t grid_height);
+
     ~AStar();
+
     vector<SDL_Point> Search(const SDL_Point &start_point, const SDL_Point &end_point);
+
 private:
     vector<vector<Node>> nodes_;
     vector<Node> open_list_{};
-    int delta_[4][2]{ {-1, 0}, {0, -1}, {1, 0}, {0, 1} };
-    int Heuristic(const int start_point_x, const int start_point_y, const int end_point_x, const int end_point_y);
+    constexpr static int delta_[4][2]{ {-1, 0}, {0, -1}, {1, 0}, {0, 1} };
+
     bool IsInRange(const int x, const int y);
+
+    inline int Heuristic(int x1, int y1, int x2, int y2) {
+      return std::abs(x2 - x1) + std::abs(y2 - y1);
+    }
 };
 
 #endif
